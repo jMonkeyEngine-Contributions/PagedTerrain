@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: me.jayfella.pagedterrain
+OpenIDE-Module-Implementation-Version: 0
+OpenIDE-Module-Localizing-Bundle: me/jayfella/pagedterrain/Bundle.properties
+
