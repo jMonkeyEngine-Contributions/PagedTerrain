@@ -22,7 +22,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-public class GridBasedTerrain extends AbstractControl
+public class NoiseBasedTerrain extends AbstractControl
 {
     private SceneApplication app = SceneApplication.getApplication();
 
@@ -52,10 +52,10 @@ public class GridBasedTerrain extends AbstractControl
 
     private final Node terrainNode = new Node("Paged Terrain");
 
-    public GridBasedTerrain() { }
+    public NoiseBasedTerrain() { }
 
     // used for Terrain Wizard
-    public GridBasedTerrain(AssetManager assetManager, Node parentNode,
+    public NoiseBasedTerrain(AssetManager assetManager, Node parentNode,
             int blockSize, int patchSize,
             Vector3f worldScale,
             int vd_north, int vd_east, int vd_south, int vd_west,
@@ -354,7 +354,6 @@ public class GridBasedTerrain extends AbstractControl
 
 
     @Override
-    // public void update(float tpf)
     protected void controlUpdate(float tpf)
     {
         currentChunkLoc.set((int)(app.getCamera().getLocation().getX() + positionAdjustment) >> bitshift, (int)(app.getCamera().getLocation().getZ() + positionAdjustment) >> bitshift);

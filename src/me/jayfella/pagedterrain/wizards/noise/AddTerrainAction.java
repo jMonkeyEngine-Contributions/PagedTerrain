@@ -1,6 +1,6 @@
 package me.jayfella.pagedterrain.wizards.noise;
 
-import me.jayfella.pagedterrain.core.GridBasedTerrain;
+import me.jayfella.pagedterrain.core.NoiseBasedTerrain;
 import com.jme3.app.SimpleApplication;
 import com.jme3.gde.core.assets.ProjectAssetManager;
 import com.jme3.gde.core.scene.FakeApplication;
@@ -34,7 +34,7 @@ public class AddTerrainAction extends AbstractNewControlWizardAction
 
     public AddTerrainAction()
     {
-        name = "Paged Terrain...";
+        name = "Noise-Based Paged Terrain...";
     }
 
     @Override
@@ -91,7 +91,7 @@ public class AddTerrainAction extends AbstractNewControlWizardAction
 
         Vector3f scale = new Vector3f(scaleX, scaleY, scaleZ);
 
-        GridBasedTerrain terrain = new GridBasedTerrain(manager, parent, blockSize, patchSize, scale, vd_north, vd_east, vd_south, vd_west, defaultMaterial);
+        NoiseBasedTerrain terrain = new NoiseBasedTerrain(manager, parent, blockSize, patchSize, scale, vd_north, vd_east, vd_south, vd_west, defaultMaterial);
 
         float noise_roughness = Float.parseFloat(wiz.getProperty("noise_roughness").toString());
         float noise_frequency = Float.parseFloat(wiz.getProperty("noise_frequency").toString());
