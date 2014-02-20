@@ -29,6 +29,8 @@ public class GridBasedTerrain extends AbstractControl
     private FilteredBasis noiseGenerator;
     private Material defaultMaterial;
 
+    private TerrainListener terrainListener;
+
     private int vd_north = 2, vd_east = 2, vd_south = 2, vd_west = 2, totalVisibleChunks = 25;
     private int blockSize, patchSize, bitshift, positionAdjustment;
 
@@ -82,8 +84,23 @@ public class GridBasedTerrain extends AbstractControl
         this.noiseGenerator = basis;
     }
 
-    public boolean terrainLoadRequested(TerrainQuad tq) { return true; }
-    public boolean terrainUnloadRequested(TerrainQuad tq) { return true; }
+    public boolean terrainLoadRequested(TerrainQuad tq)
+    {
+        if (terrainListener != null)
+            return terrainListener.terrainLoadRequested(tq);
+
+        return true;
+    }
+    public boolean terrainUnloadRequested(TerrainQuad tq)
+    {
+        if (terrainListener != null)
+            return terrainListener.terrainUnloadRequested(tq);
+
+        return true;
+    }
+
+    public TerrainListener getTerrainListener() { return this.terrainListener; }
+    public void setTerrainListener(TerrainListener listener) { this.terrainListener = listener; }
 
     public TerrainQuad getTerrainQuad(GridPosition location)
     {
