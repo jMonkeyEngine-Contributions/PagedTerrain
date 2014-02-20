@@ -331,7 +331,8 @@ public final class AddTerrainActionVisualPanel1 extends JPanel
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, "Grid Scale:");
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, "<html>The grid scale acts as a multiplier for the block size set previously on the X any Z planes. The maximum height is determined by the Y plane scale.</html>");
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, "<html>The grid scale acts as a multiplier for the block size set previously on the X and Z planes. The maximum height is determined by the Y plane scale.</html>");
+        jLabel7.setToolTipText("");
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel8, "Y:");
 

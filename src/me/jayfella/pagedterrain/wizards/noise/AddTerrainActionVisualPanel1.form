@@ -217,7 +217,8 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;The grid scale acts as a multiplier for the block size set previously on the X any Z planes. The maximum height is determined by the Y plane scale.&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;The grid scale acts as a multiplier for the block size set previously on the X and Z planes. The maximum height is determined by the Y plane scale.&lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">

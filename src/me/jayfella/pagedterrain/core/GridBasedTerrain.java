@@ -10,14 +10,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.control.AbstractControl;
 import com.jme3.terrain.geomipmap.TerrainLodControl;
 import com.jme3.terrain.geomipmap.TerrainQuad;
-import com.jme3.terrain.noise.ShaderUtils;
 import com.jme3.terrain.noise.basis.FilteredBasis;
-import com.jme3.terrain.noise.filter.IterativeFilter;
-import com.jme3.terrain.noise.filter.OptimizedErode;
-import com.jme3.terrain.noise.filter.PerturbFilter;
-import com.jme3.terrain.noise.filter.SmoothFilter;
-import com.jme3.terrain.noise.fractal.FractalSum;
-import com.jme3.terrain.noise.modulator.NoiseModulator;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,9 +24,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class GridBasedTerrain extends AbstractControl
 {
-    // private GridBasedTerrain gridBasedTerrain;
-
-    // private SimpleApplication app;
     private SceneApplication app = SceneApplication.getApplication();
 
     private FilteredBasis noiseGenerator;
@@ -58,7 +48,6 @@ public class GridBasedTerrain extends AbstractControl
     private final Queue<TerrainQuad> pendingAddition = new ConcurrentLinkedQueue<TerrainQuad>();
     private final ScheduledThreadPoolExecutor threadpool = new ScheduledThreadPoolExecutor(Runtime.getRuntime().availableProcessors());
 
-    // private Node parentNode;
     private final Node terrainNode = new Node("Paged Terrain");
 
     public GridBasedTerrain() { }
@@ -70,8 +59,6 @@ public class GridBasedTerrain extends AbstractControl
             int vd_north, int vd_east, int vd_south, int vd_west,
             String defaultMaterial)
     {
-        // this.app = app;
-        // this.parentNode = parentNode;
         this.blockSize = blockSize;
         this.patchSize = patchSize;
         this.worldScale = worldScale;
@@ -84,11 +71,9 @@ public class GridBasedTerrain extends AbstractControl
         this.vd_south = vd_south;
         this.vd_west = vd_west;
 
-        // this.noiseGenerator = createNoiseGenerator();
+        this.totalVisibleChunks = (vd_west + vd_east + 1) * (vd_north + vd_south + 1);
 
         this.defaultMaterial = assetManager.loadMaterial(defaultMaterial);
-
-        // app.getRootNode().attachChild(terrainNode);
         parentNode.attachChild(terrainNode);
     }
 
@@ -96,47 +81,6 @@ public class GridBasedTerrain extends AbstractControl
     {
         this.noiseGenerator = basis;
     }
-
-    /* private FilteredBasis createNoiseGenerator()
-    {
-        FractalSum base = new FractalSum();
-        base.setRoughness(0.7f);
-        base.setFrequency(1.0f);
-        base.setAmplitude(1.0f);
-        base.setLacunarity(3.12f);
-        base.setOctaves(8);
-        base.setScale(0.02125f);
-        base.addModulator(new NoiseModulator()
-            {
-                @Override public float value(float... in)
-                {
-                    return ShaderUtils.clamp(in[0] * 0.5f + 0.5f, 0, 1);
-                }
-            });
-
-        FilteredBasis ground = new FilteredBasis(base);
-        PerturbFilter perturb = new PerturbFilter();
-        perturb.setMagnitude(0.119f);
-
-        OptimizedErode therm = new OptimizedErode();
-        therm.setRadius(5);
-        therm.setTalus(0.011f);
-
-        SmoothFilter smooth = new SmoothFilter();
-        smooth.setRadius(1);
-        smooth.setEffect(0.7f);
-
-        IterativeFilter iterate = new IterativeFilter();
-        iterate.addPreFilter(perturb);
-        iterate.addPostFilter(smooth);
-        iterate.setFilter(therm);
-        iterate.setIterations(1);
-
-        ground.addPreFilter(iterate);
-
-        return ground;
-    } */
-
 
     public boolean terrainLoadRequested(TerrainQuad tq) { return true; }
     public boolean terrainUnloadRequested(TerrainQuad tq) { return true; }
@@ -420,19 +364,6 @@ public class GridBasedTerrain extends AbstractControl
             oldChunkLoc.set(currentChunkLoc.getX(), currentChunkLoc.getZ());
         }
     }
-
-    /* @Override
-    public void close()
-    {
-        threadpool.shutdown();
-    }*/
-
-    /* @Override
-    public void destroy() throws IOException
-    {
-        super.destroy();
-        threadpool.shutdown();
-    } */
 
     @Override
     protected void controlRender(RenderManager rm, ViewPort vp)
