@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE library PUBLIC "-//NetBeans//DTD Library Declaration 1.0//EN" "http://www.netbeans.org/dtds/library-declaration-1_0.dtd">
+<library version="1.0">
+    <name>PagedTerrain</name>
+    <type>j2se</type>
+    <localizing-bundle>me.jayfella.pagedterrain.Bundle</localizing-bundle>
+    <volume>
+        <type>classpath</type>
+        <resource>jar:nbinst://me.jayfella.pagedterrain/libs/me-jayfella-pagedterrain.jar!/</resource>
+    </volume>
+    <volume>
+        <type>src</type>
+        <resource>jar:nbinst://me.jayfella.pagedterrain/sources/me-jayfella-pagedterrain.jar!/</resource>
+    </volume>
+    <volume>
+        <type>javadoc</type>
+    </volume>
+</library>
